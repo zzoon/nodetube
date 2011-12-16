@@ -1,0 +1,20 @@
+div(data-role='page')
+    header(data-role='header')
+        h1= title
+    div(data-role='content')
+      //just basic check, we will always have items from youtube though
+        - if(items.length)
+            //create a listview wrapper
+            ul(data-role='listview')
+                //foreach of the collected elements
+                - items.forEach(function(item){
+                    //create a li
+                    li
+                        //and a link using our passed urlObj Object
+                        a(href='/watch/' + item['urlObj'].query.v, title=item['title'])
+                            //and a thumbnail
+                            img(src=item['thumbnail'], alt='Thumbnail')
+                            //title and time label
+                            h3= item['title']
+                            h5= item['time']
+                - })
