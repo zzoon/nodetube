@@ -1,9 +1,11 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.5.2"
-    , "jade": ">= 0.0.1"
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "2.5.2",
+    "jade": ">= 0.0.1",
+    "jsdom": "^0.10.5",
+    "request": "^2.36.0"
   }
 }

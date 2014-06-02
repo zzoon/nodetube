@@ -53,27 +53,27 @@ app.get('/nodetube', function(req, res){
 
     //Send the body param as the HTML code we will parse in jsdom
     //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
-    jsdom.env({
-      html: body,
-      scripts: ['http://code.jquery.com/jquery-1.6.min.js']
-    }, function(err, window){
+    jsdom.env(
+      body,
+      ['http://code.jquery.com/jquery-1.6.min.js']
+    , function(err, window){
       //Use jQuery just as in a regular HTML page
       var $ = window.jQuery;
  
-      //console.log($('title').text());
+      console.log($('title').text());
       //res.end($('title').text());
 
-      $body = $('body'),
-      $videos = $body.find('.feed-item-content');
+      var $body = $('body'),
+      $videos = $body.find('.feed-item-main-content .yt-shelf-grid-item');
       //$videos = $body.find('.feed-item-visual-description');
 
       $videos.each(function(i, item) {
         var $item = $(item);
-        var $description = $item.find('.title');
+        var $description = $item.find('.yt-lockup-title > a');
         var $title = $description.text();
         var $a = $description.attr('href');
-        var $time = $item.find('span.video-time').text();
-        var $img = $item.find('span.clip img');
+        var $time = $item.find('.yt-lockup-deemphasized-text').text();
+        var $img = $item.find('span..yt-thumb-clip img');
         var $thumb = $img.attr('data-thumb') ? $img.attr('data-thumb') : $img.attr('src');
 
         self.items[i] = {
@@ -85,7 +85,7 @@ app.get('/nodetube', function(req, res){
         }
       });
 
-      console.log(self.items);
+      console.log(self.items.length);
 
       res.render('list', {
 	                       title: 'NodeTube',
